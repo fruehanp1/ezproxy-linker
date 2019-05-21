@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script type="text/javascript" src="conv.js"></script>
+<link href="css/bootstrap-4.0.0.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12"></div>
+    <h1>Off-Campus Link Generator</h1>
+    <p>This tool will add coding to a persistent link or to a DOI Name found in a database that will allow it to be used from outside the SCSU campus network if it is not already embedded in the URL.</p>
+    <p>Please Note: Putting a URL through the Off-Campus Access Link Generator will not allow non-SCSU affiliates to access online library-licensed resources. Only SCSU students, staff, and faculty with a valid SCSU MyApps login have remote access to library-licensed electronic resources.</p>
+    <hr>
+  </div>
+  <form name="convURL">
+    <div class="row">
+      <div class="col-lg-5">
+        <div class="card text-center">
+          <div class="card-header">Article URL or Full DOI URI</div>
+          <div class="card-body">
+            <h5 class="card-title">Paste Here</h5>
+            <p class="card-text">
+            <div class="form-group card-text">
+              <input type="url" class="form-control" id="inputURL" placeholder="URL or DOI">
+            </div>
+            </p>
+            <div class="btn-group" role="group">
+              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="Reset" class="btn btn-secondary">Reset</button>
+            </div>
+          </div>
+          <div class="card-footer text-muted"><small id="URLHelp1" class="form-text text-muted">example: http://ejournals.ebsco.com/direct.asp?ArticleID=4AFD8E171CE06256EC86 or&nbsp;http://dx.doi.org/10.1300/J136v10n03_13</small></div>
+        </div>
+      </div>
+      <div class="col-lg-2 text-center">
+        <h4>OR</h4>
+      </div>
+      <div class="col-lg-5">
+        <div class="card text-center">
+          <div class="card-header"> DOI Name</div>
+          <div class="card-body">
+            <h5 class="card-title">Paste Here</h5>
+            <p class="card-text">
+              <input type="text" class="form-control" id="input_doi" placeholder="DOI Name">
+            </p>
+            <div class="btn-group" role="group">
+              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="Reset" class="btn btn-secondary">Reset</button>
+            </div>
+          </div>
+          <div class="card-footer text-muted"><small id="DOIHelp1" class="form-text text-muted">example: 10.1300/J136v10n03_13</small></div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel panel-success">
+        <div class="panel-body">
+          <div class="form-group">
+            <h3>Result: URL converted for off-campus access</h3>
+            <textarea class="form-control" name="output_url" id="output_url" readonly="readonly"></textarea>
+          </div>
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-primary" data-clipboard-action="copy" data-clipboard-target="#output_url">Copy URL</button>
+            <button type="button" class="btn btn-secondary" onclick="window.open(document.convURL.output_url.value,'_blank')">Test</button>
+            <button type="reset" class="btn btn-secondary">Reset</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+<script>
+    var clipboard = new ClipboardJS('.btn');
+    clipboard.on('success', function(e) {
+        console.log(e);
+    });
+    clipboard.on('error', function(e) {
+        console.log(e);
+    });
+    </script>
+</body>
+</html>
