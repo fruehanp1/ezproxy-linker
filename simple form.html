@@ -3,7 +3,61 @@
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script type="text/javascript" src="conv.js"></script>
+<script type="text/javascript">
+function newURL() {
+  var p = '.scsu.idm.oclc.org';
+  var u = document.convURL.input_url.value;
+  var a = new Array();
+  a = u.split('/');
+  var s = "";
+  var o = "";
+  var f = "";
+  var r = 'login.scsu.idm.oclc.org/login?url=';
+
+
+  if (u !== "") {
+    if (a[0] == "http:") {
+      f = a[0] + '//' + a[2] + p;
+
+      for (x = 3; x < a.length; x++) {
+        s = s + '/' + a[x];
+      }
+      o = f + s;
+      document.convURL.output_url.value = o;
+    } else if (a[0] == "https:") {
+      f = 'https://' + r + u;
+      o = f;
+      document.convURL.output_url.value = o;
+    } else {
+      f = 'http://' + a[0] + p;
+      for (x = 1; x < a.length; x++) {
+        s = s + '/' + a[x];
+      }
+      o = f + s;
+      document.convURL.output_url.value = o;
+    }
+  } else {
+    alert("Please Enter a valid URL!");
+  }
+
+}
+
+function newDOI() {
+  var d = document.convURL.input_doi.value;
+  var o = 'http://dx.doi.org.scsu.idm.oclc.org/' + d;
+
+  if (d != "") {
+    document.convURL.output_url.value = o;
+  } else {
+    alert("Please Enter a DOI Name");
+  }
+}
+function copy(cp_str)
+
+{
+  document.execCommand('copy');
+}
+</script>
 <link href="css/bootstrap-4.0.0.css" rel="stylesheet" type="text/css">
 </head>
 <body>
@@ -24,11 +78,11 @@
             <h5 class="card-title">Paste Here</h5>
             <p class="card-text">
             <div class="form-group card-text">
-              <input type="url" class="form-control" id="inputURL" placeholder="URL or DOI">
+              <input type="url" class="form-control" id="input_url" placeholder="URL or DOI">
             </div>
             </p>
             <div class="btn-group" role="group">
-              <button type="submit" class="btn btn-primary">Submit</button>
+              <input class="btn btn-primary" onclick="newURL()" type="button" value="Convert" />
               <button type="Reset" class="btn btn-secondary">Reset</button>
             </div>
           </div>
@@ -47,7 +101,7 @@
               <input type="text" class="form-control" id="input_doi" placeholder="DOI Name">
             </p>
             <div class="btn-group" role="group">
-              <button type="submit" class="btn btn-primary">Submit</button>
+              <input class="btn btn-primary" onclick="newDOI()" type="button" value="Convert" />
               <button type="Reset" class="btn btn-secondary">Reset</button>
             </div>
           </div>
@@ -55,24 +109,32 @@
         </div>
       </div>
     </div>
-  </form>
   <div class="row">
     <div class="col-lg-12">
       <div class="panel panel-success">
         <div class="panel-body">
-          <div class="form-group">
+					<h3>Result: URL converted for off-campus access</h3>
+					<div class="form-group">
+					<input class="form-control" name="output_url" id="output_url" readonly=readonly />
+					<span class="input-group-button">
+					<button class="btn" type="button" data-clipboard-demo="" data-clipboard-target="#output_url">
+					<img class="clippy" src="css/clippy.svg" width="13" alt="Copy to clipboard">
+					</button>
+					</span>
+					</div>
+					<!-- <div class="form-group">
             <h3>Result: URL converted for off-campus access</h3>
             <textarea class="form-control" name="output_url" id="output_url" readonly="readonly"></textarea>
-          </div>
+          </div> -->
           <div class="btn-group" role="group">
-            <button type="button" class="btn btn-primary" data-clipboard-action="copy" data-clipboard-target="#output_url">Copy URL</button>
-            <button type="button" class="btn btn-secondary" onclick="window.open(document.convURL.output_url.value,'_blank')">Test</button>
+						<button type="button" class="btn btn-primary" onclick="window.open(document.convURL.output_url.value,'_blank')">Test</button>
             <button type="reset" class="btn btn-secondary">Reset</button>
           </div>
         </div>
       </div>
     </div>
   </div>
+	  </form>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
 <script>

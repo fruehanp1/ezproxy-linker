@@ -2,7 +2,7 @@
 function newURL() {
   var p = '.scsu.idm.oclc.org';
   var u = document.convURL.input_url.value;
-  var a = new Array[];
+  var a = new Array();
   a = u.split('/');
   var s = "";
   var o = "";
